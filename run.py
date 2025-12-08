@@ -2,7 +2,7 @@
 from app.rag_query import RAGQuery
 
 def main():
-    rag = RAGQuery("index.json")
+    rag = RAGQuery("index/vector_index.json")
 
     while True:
         query = input("\nAsk your question (or 'exit'): ")
@@ -11,7 +11,7 @@ def main():
             break
 
         result = rag.ask(query)
-        print("\n--- RAG Answer ---")
+        print("\n")
         print(result["answer"])
         print("\n--- Context Used ---")
         print(result["context"][:500], "...")

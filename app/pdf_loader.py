@@ -1,27 +1,27 @@
 # app/pdf_loader.py
-import pdfplumber
 import os
+import pdfplumber
 
-def load_document(file_path):
-    """
-    Load a PDF or TXT file and return its text content.
-    """
+def load_file(file_path):
+    """Load text from PDF or TXT."""
+    
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File not found: {file_path}")
 
     ext = os.path.splitext(file_path)[1].lower()
-    text = ""
 
+    # ---------------- PDF ----------------
     if ext == ".pdf":
+        text = ""
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages:
-                page_text = page.extract_text()
-                if page_text:  # Some pages may be empty
-                    text += page_text + "\n"
-    elif ext == ".txt":
-        with open(file_path, "r", encoding="utf-8") as f:
-            text = f.read()
-    else:
-        raise ValueError("Unsupported file type. Only PDF and TXT are allowed.")
+                text += page.extract_text() or ""
+        return text
 
-    return text.strip()
+    # ---------------- TXT ----------------
+    elif ext == ".txt":
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+            return f.read()
+
+    else:
+        raise ValueError(f"Unsupported file format: {ext}")
