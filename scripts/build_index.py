@@ -5,9 +5,28 @@ import json
 from app.pdf_loader import load_file
 from app.embedder import get_embedding
 
-
 DATA_DIR = "data"
 INDEX_PATH = "index/vector_index.json"
+
+# --- Chunking settings ---
+CHUNK_SIZE = 500      # Approx number of characters per chunk
+CHUNK_OVERLAP = 50    # Overlap characters between chunks for context
+
+# CHUNK_SIZE = 100
+# CHUNK_OVERLAP = 20
+
+def chunk_text(text, size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
+    """Split text into overlapping chunks."""
+    chunks = []
+    start = 0
+    text_len = len(text)
+    while start < text_len:
+        end = min(start + size, text_len)
+        chunk = text[start:end].strip()
+        if chunk:
+            chunks.append(chunk)
+        start += size - overlap  # move start forward but keep overlap
+    return chunks
 
 
 def build_index():
@@ -34,17 +53,22 @@ def build_index():
             print(f"[!] Empty content skipped: {filename}")
             continue
 
-        # Compute embedding using Ollama
-        emb = get_embedding(text)
+        # --- Chunk the text ---
+        text_chunks = chunk_text(text)
 
-        if not isinstance(emb, list):
-            raise ValueError("Embedding must be a Python list!")
+        for i, chunk in enumerate(text_chunks):
+            # Compute embedding using Ollama
+            emb = get_embedding(chunk)
 
-        index.append({
-            "file": filename,
-            "text": text,
-            "embedding": emb
-        })
+            if not isinstance(emb, list):
+                raise ValueError("Embedding must be a Python list!")
+
+            index.append({
+                "file": filename,
+                "chunk_id": i,
+                "text": chunk,
+                "embedding": emb
+            })
 
     # Save index
     os.makedirs(os.path.dirname(INDEX_PATH), exist_ok=True)
