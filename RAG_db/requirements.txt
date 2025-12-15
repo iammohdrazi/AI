@@ -1,0 +1,7 @@
+numpy
+sentence-transformers
+pdfplumber
+ollama
+faiss-cpu
+chromadb
+requests

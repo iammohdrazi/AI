@@ -1,0 +1,62 @@
+INTERNAL COMPANY TRAINING MANUAL
+Zephyr Technologies
+
+--------------------------------------------------
+Section 1: Company Overview
+--------------------------------------------------
+Zephyr Technologies is a mid-sized software company founded in 2016.
+The company specializes in cloud-native applications and AI-driven analytics tools.
+Its headquarters is located in Bengaluru, India.
+
+The CEO of Zephyr Technologies is Ananya Verma.
+
+--------------------------------------------------
+Section 2: Employee Information
+--------------------------------------------------
+Zephyr Technologies has multiple departments including Engineering,
+Data Science, HR, and Sales.
+
+Key Employees:
+
+Rahul Mehta:
+- Role: Senior Data Scientist
+- Joined: March 2019
+- Employee ID: ZT-DS-204
+
+Neha Sharma:
+- Role: Frontend Engineer
+- Department: Engineering
+- Joined: July 2021
+
+--------------------------------------------------
+Section 3: Project Atlas
+--------------------------------------------------
+Project Atlas is an internal AI project focused on document understanding
+and knowledge retrieval.
+
+Key details:
+- Project start date: January 2023
+- Technical Lead: Rahul Mehta
+- Goal: Build a Retrieval-Augmented Generation (RAG) system
+  for internal documents
+
+--------------------------------------------------
+Section 4: System Infrastructure
+--------------------------------------------------
+The RAG system for Project Atlas uses:
+- PDF and CSV documents as input
+- Text chunking with overlap
+- Vector embeddings stored in a vector database
+
+Vector databases under evaluation:
+- FAISS
+- ChromaDB
+
+--------------------------------------------------
+Section 5: Confidential Notes
+--------------------------------------------------
+Only employees working on Project Atlas are allowed access
+to confidential system logs.
+
+The internal codename for the production RAG system is:
+Orion
