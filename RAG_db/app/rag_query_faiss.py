@@ -52,7 +52,7 @@ Answer:
 
         response = requests.post(
             "http://localhost:11434/api/generate",
-            json={"model": "llama3.2:1b", "prompt": prompt},
+            json={"model": "deepseek-r1:1.5b", "prompt": prompt},
             stream=True
         )
 
